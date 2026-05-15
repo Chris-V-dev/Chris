@@ -1,0 +1,116 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import storefront from "@/assets/storefront.jpg";
+import hero from "@/assets/hero.jpg";
+
+export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: "About — Carpenter's Daughter" },
+      {
+        name: "description",
+        content:
+          "The story behind Carpenter's Daughter — a small home goods shop in Watertown, MN, built on restoration, local makers, and a love of beautiful, useful things.",
+      },
+      { property: "og:title", content: "About — Carpenter's Daughter" },
+      { property: "og:description", content: "Restoration, local makers, and a love of beautiful, useful things." },
+      { property: "og:image", content: storefront },
+    ],
+  }),
+  component: About,
+});
+
+function About() {
+  return (
+    <>
+      <section className="container-px mx-auto max-w-7xl pt-16 pb-12 md:pt-24">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Our story</p>
+        <h1 className="mt-4 max-w-4xl font-serif text-5xl md:text-7xl">
+          A little shop on Lewis Avenue, built from a love of second chances.
+        </h1>
+      </section>
+
+      <section className="container-px mx-auto max-w-7xl pb-24">
+        <img
+          src={storefront}
+          alt="The Carpenter's Daughter storefront in Watertown, Minnesota"
+          width={1400}
+          height={1000}
+          loading="lazy"
+          className="aspect-[16/10] w-full object-cover"
+        />
+      </section>
+
+      <section className="container-px mx-auto max-w-3xl pb-24">
+        <div className="space-y-6 text-lg leading-relaxed text-foreground/85">
+          <p>
+            Carpenter's Daughter started the way the best small shops do — quietly, and
+            because we couldn't help ourselves. A worn-out dresser found at an estate
+            sale. An afternoon of sanding and painting. A friend who said, "you should
+            sell these."
+          </p>
+          <p>
+            Years later, the shop is still rooted in that same idea: that a beautiful,
+            useful piece doesn't have to be new. We restore furniture by hand, and we
+            fill the space around it with pottery, candles, linens, and small things
+            made by people we know — most of them right here in Minnesota.
+          </p>
+          <p>
+            We try to keep the prices fair, the welcome warm, and the doors open to
+            anyone who wants to wander in for ten minutes or an hour.
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-cream">
+        <div className="container-px mx-auto grid max-w-7xl gap-12 py-24 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">What we believe</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-5xl">A few small principles.</h2>
+          </div>
+          <div className="md:col-span-7">
+            <dl className="grid gap-10 sm:grid-cols-2">
+              {[
+                ["Restore, then recycle", "Every piece deserves a second look before a landfill."],
+                ["Buy from neighbors", "We stock makers we can shake the hand of."],
+                ["Fair prices, always", "Beautiful shouldn't mean unattainable."],
+                ["A quiet welcome", "No pressure. Stay as long as you'd like."],
+              ].map(([t, d]) => (
+                <div key={t}>
+                  <dt className="font-serif text-xl">{t}</dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-px mx-auto max-w-7xl py-24">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+          <img
+            src={hero}
+            alt="A sunlit corner of the shop with linens, pottery, and a restored cedar chest"
+            width={1600}
+            height={1200}
+            loading="lazy"
+            className="aspect-[4/5] w-full object-cover"
+          />
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Come by</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-5xl">We'd love to meet you.</h2>
+            <p className="mt-4 text-base text-muted-foreground">
+              You'll find us on Lewis Avenue in downtown Watertown — open Wednesday
+              through Saturday. New things arrive every week.
+            </p>
+            <Link
+              to="/visit"
+              className="mt-8 inline-block rounded-sm bg-primary px-6 py-3 text-xs uppercase tracking-[0.25em] text-primary-foreground"
+            >
+              Plan your visit
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

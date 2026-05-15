@@ -1,0 +1,234 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import heroImg from "@/assets/hero.jpg";
+import catFurniture from "@/assets/cat-furniture.jpg";
+import catDecor from "@/assets/cat-decor.jpg";
+import catTextiles from "@/assets/cat-textiles.jpg";
+import catSeasonal from "@/assets/cat-seasonal.jpg";
+import { Star } from "lucide-react";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Carpenter's Daughter — Home Goods in Watertown, MN" },
+      {
+        name: "description",
+        content:
+          "A small, lovingly curated home goods shop in downtown Watertown, MN. Restored furniture, locally made decor, and pieces with a story.",
+      },
+    ],
+  }),
+  component: Home,
+});
+
+const categories = [
+  { title: "Restored Furniture", img: catFurniture, blurb: "Cedar chests, dressers, and one-of-a-kind pieces, lovingly brought back." },
+  { title: "Decor & Pottery", img: catDecor, blurb: "Handmade vases, candles, and small accents from local makers." },
+  { title: "Linens & Textiles", img: catTextiles, blurb: "Soft linen throws, cotton tea towels, and quilts for everyday." },
+  { title: "Seasonal & Holiday", img: catSeasonal, blurb: "Wreaths, candles, and warm-weather and holiday touches." },
+];
+
+const reviews = [
+  {
+    quote:
+      "The shop is so fun. A very calming environment. I have purchased much of my decor from them — their style is amazing!",
+    name: "Debby M.",
+  },
+  {
+    quote:
+      "Always has new items and amazingly done repurposed creations. The owner has such a unique eye — you'll never walk away empty handed.",
+    name: "Jennifer J.",
+  },
+  {
+    quote:
+      "Such a great little shop. Found a cedar chest gorgeously restored for an amazing price. All their items are so reasonable and adorable.",
+    name: "Sara D.",
+  },
+];
+
+function Home() {
+  return (
+    <>
+      {/* Hero */}
+      <section className="relative">
+        <div className="container-px mx-auto grid max-w-7xl gap-10 pt-12 pb-20 md:grid-cols-12 md:gap-12 md:pt-20 md:pb-28">
+          <div className="md:col-span-5 md:pt-12">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              Est. Watertown, Minnesota
+            </p>
+            <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-6xl lg:text-7xl">
+              A home goods shop with a story in every piece.
+            </h1>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
+              Restored furniture, locally made decor, and the kind of cozy little
+              finds that turn a house into a home. Pop in — you'll never walk away
+              empty handed.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                to="/shop"
+                className="inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-foreground"
+              >
+                Browse the shop
+              </Link>
+              <Link
+                to="/visit"
+                className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-foreground underline-offset-4 hover:underline"
+              >
+                Plan your visit →
+              </Link>
+            </div>
+            <div className="mt-10 flex items-center gap-3 text-sm text-muted-foreground">
+              <div className="flex">
+                {[0,1,2,3,4].map((i) => (
+                  <Star key={i} size={14} className="fill-foreground text-foreground" />
+                ))}
+              </div>
+              <span>4.8 · 22 Google reviews</span>
+            </div>
+          </div>
+          <div className="md:col-span-7">
+            <div className="relative overflow-hidden">
+              <img
+                src={heroImg}
+                alt="Inside Carpenter's Daughter — a sunlit display of pottery, linens, and a restored cedar chest"
+                width={1600}
+                height={1200}
+                className="h-[60vh] w-full object-cover md:h-[78vh]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Marquee values */}
+      <section className="border-y border-border/60 bg-cream">
+        <div className="container-px mx-auto grid max-w-7xl gap-8 py-10 text-sm md:grid-cols-3">
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Locally made</p>
+            <p className="mt-2 font-serif text-lg">From Minnesota makers</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Lovingly restored</p>
+            <p className="mt-2 font-serif text-lg">Furniture with a second life</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Reasonably priced</p>
+            <p className="mt-2 font-serif text-lg">Beautiful without the markup</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="container-px mx-auto max-w-7xl py-24">
+        <div className="mb-12 flex items-end justify-between gap-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Inside the shop</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-5xl">What you'll find</h2>
+          </div>
+          <Link to="/shop" className="hidden text-xs uppercase tracking-[0.25em] underline-offset-4 hover:underline md:inline">
+            View all →
+          </Link>
+        </div>
+        <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
+          {categories.map((c) => (
+            <article key={c.title} className="group">
+              <div className="overflow-hidden bg-cream">
+                <img
+                  src={c.img}
+                  alt={c.title}
+                  width={1024}
+                  height={1024}
+                  loading="lazy"
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="mt-5 font-serif text-2xl">{c.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.blurb}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Story strip */}
+      <section className="bg-cream">
+        <div className="container-px mx-auto grid max-w-7xl gap-12 py-24 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Our story</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-5xl">A little shop. A whole lot of heart.</h2>
+          </div>
+          <div className="md:col-span-7">
+            <p className="text-base leading-relaxed text-foreground/80">
+              Carpenter's Daughter began with a love of taking what others passed by — a
+              tired chest, a forgotten dresser — and giving it a second life. Today the
+              shop is filled with restored furniture, locally made pottery, soft linens,
+              and seasonal touches, each chosen with care.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-foreground/80">
+              Stop in on a slow afternoon. Pet the shop dog (sometimes). Find the piece
+              you didn't know you were looking for.
+            </p>
+            <Link
+              to="/about"
+              className="mt-8 inline-block text-xs uppercase tracking-[0.25em] underline-offset-4 hover:underline"
+            >
+              Read our story →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="container-px mx-auto max-w-7xl py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Kind words</p>
+          <h2 className="mt-3 font-serif text-4xl md:text-5xl">From the neighborhood</h2>
+        </div>
+        <div className="mt-16 grid gap-10 md:grid-cols-3">
+          {reviews.map((r) => (
+            <figure key={r.name} className="border-t border-border pt-6">
+              <div className="flex">
+                {[0,1,2,3,4].map((i) => (
+                  <Star key={i} size={12} className="fill-foreground text-foreground" />
+                ))}
+              </div>
+              <blockquote className="mt-4 font-serif text-xl leading-snug">
+                "{r.quote}"
+              </blockquote>
+              <figcaption className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                — {r.name}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Visit CTA */}
+      <section className="container-px mx-auto max-w-7xl pb-24">
+        <div className="border border-border bg-cream px-8 py-16 text-center md:px-16 md:py-24">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Come say hello</p>
+          <h2 className="mx-auto mt-4 max-w-2xl font-serif text-4xl md:text-5xl">
+            113 Lewis Ave S, Watertown, MN
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
+            Open Wednesday through Saturday. New finds arrive every week — no two
+            visits are quite the same.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              to="/visit"
+              className="inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 text-xs uppercase tracking-[0.25em] text-primary-foreground"
+            >
+              Get directions
+            </Link>
+            <a
+              href="tel:9526839565"
+              className="inline-flex items-center justify-center rounded-sm border border-foreground px-6 py-3 text-xs uppercase tracking-[0.25em]"
+            >
+              Call (952) 683-9565
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

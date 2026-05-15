@@ -1,0 +1,111 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { MapPin, Phone, Clock } from "lucide-react";
+
+export const Route = createFileRoute("/visit")({
+  head: () => ({
+    meta: [
+      { title: "Visit — Carpenter's Daughter, Watertown MN" },
+      {
+        name: "description",
+        content:
+          "Visit Carpenter's Daughter at 113 Lewis Ave S, Watertown, MN. Hours, directions, and contact.",
+      },
+      { property: "og:title", content: "Visit — Carpenter's Daughter" },
+      { property: "og:description", content: "113 Lewis Ave S, Watertown, MN. Open Wed–Sat." },
+    ],
+  }),
+  component: Visit,
+});
+
+const hours = [
+  ["Sunday", "Closed"],
+  ["Monday", "Closed"],
+  ["Tuesday", "Closed"],
+  ["Wednesday", "10 AM – 5 PM"],
+  ["Thursday", "10 AM – 5 PM"],
+  ["Friday", "10 AM – 5 PM"],
+  ["Saturday", "10 AM – 4 PM"],
+];
+
+function Visit() {
+  return (
+    <>
+      <section className="container-px mx-auto max-w-7xl pt-16 pb-16 md:pt-24">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Visit</p>
+        <h1 className="mt-4 max-w-3xl font-serif text-5xl md:text-7xl">
+          Find us on Lewis Avenue.
+        </h1>
+        <p className="mt-6 max-w-xl text-base text-muted-foreground">
+          Tucked into downtown Watertown — easy parking on the street, and the
+          R&amp;B Cafe a short walk away if you'd like to make a morning of it.
+        </p>
+      </section>
+
+      <section className="container-px mx-auto max-w-7xl pb-24">
+        <div className="grid gap-10 md:grid-cols-12">
+          <div className="space-y-10 md:col-span-5">
+            <div>
+              <div className="flex items-center gap-3">
+                <MapPin size={16} />
+                <h2 className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Address</h2>
+              </div>
+              <p className="mt-3 font-serif text-2xl leading-tight">
+                113 Lewis Ave S<br />Watertown, MN 55388
+              </p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=113+Lewis+Ave+S+Watertown+MN+55388"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-xs uppercase tracking-[0.25em] underline-offset-4 hover:underline"
+              >
+                Open in Google Maps →
+              </a>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-3">
+                <Phone size={16} />
+                <h2 className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Call</h2>
+              </div>
+              <a href="tel:9526839565" className="mt-3 block font-serif text-2xl">
+                (952) 683-9565
+              </a>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Happy to check stock or hold an item for you.
+              </p>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-3">
+                <Clock size={16} />
+                <h2 className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Hours</h2>
+              </div>
+              <dl className="mt-4 divide-y divide-border border-y border-border text-sm">
+                {hours.map(([day, h]) => (
+                  <div key={day} className="flex justify-between py-2.5">
+                    <dt>{day}</dt>
+                    <dd className={h === "Closed" ? "text-muted-foreground" : ""}>{h}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+
+          <div className="md:col-span-7">
+            <div className="overflow-hidden border border-border">
+              <iframe
+                title="Map to Carpenter's Daughter"
+                src="https://www.google.com/maps?q=113+Lewis+Ave+S,+Watertown,+MN+55388&output=embed"
+                width="100%"
+                height="600"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[480px] w-full md:h-[640px]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
